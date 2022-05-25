@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const noteRouter = require('./noteRoutes');
 const { protect } = require('../middleware/authMiddleware');
 const {
 	getTickets,
@@ -16,5 +17,8 @@ router
 	.get(protect, getTicket)
 	.delete(protect, deleteTicket)
 	.put(protect, updateTicket);
+
+//? Re-route into note router
+router.use('/:ticketId/notes', noteRouter);
 
 module.exports = router;
